@@ -1,9 +1,11 @@
 {
   "name": "miro",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "miro",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "serve": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/release-please/miro-test/issues"
   },
-  "homepage": "https://github.com/release-please/miro-test#readme"
+  "homepage": "https://github.com/release-please/miro-test#readme",
+  "devDependencies": {
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
 }
