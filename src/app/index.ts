@@ -1,3 +1,5 @@
+import '../styles/styles.scss'
+
 function createH1Element (text: string): HTMLElement {
   const $el = document.createElement('h1')
   $el.append(text)
