@@ -21,6 +21,7 @@
   "homepage": "https://github.com/release-please/miro-test#readme",
   "devDependencies": {
     "@types/jest": "^25.2.1",
+    "@types/react": "^16.9.32",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^4.0.4",
     "identity-obj-proxy": "^3.0.0",
