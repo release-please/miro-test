@@ -1,6 +1,6 @@
 interface vNode {
-  tag: string,
-  props: null | any,
+  tag: string
+  props: null | any
   child: string[] | vNode[]
 }
 
