@@ -15,6 +15,4 @@ describe('Core test', () => {
 
     expect(actual).toStrictEqual(expected)
   })
-
-  it('Empty test should be warn lint')
 })
