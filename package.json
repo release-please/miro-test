@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint --fix \"./src/**/*\""
   },
   "repository": {
