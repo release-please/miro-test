@@ -19,10 +19,29 @@ function propsHandler ($el: HTMLElement, props: any, context?: any): void {
   for (const prop in props) {
     const value: any = props[prop]
 
+    if (eventPropHandler($el, prop, value, context)) continue
     if (refPropHandler($el, prop, value, context)) continue
     if (classPropHandler($el, prop, value)) continue
     attributePropHandler($el, prop, value)
   }
+}
+
+function eventPropHandler ($el: HTMLElement, prop: string, value: any, context?: any): boolean {
+  const isPropEventAndValueFunction = [
+    prop.startsWith('on'),
+    typeof value === 'function'
+  ].every(cond => cond)
+
+  if (isPropEventAndValueFunction) {
+    const eventName = prop.slice(2)
+    const fn = value
+
+    $el.addEventListener(eventName, (event: Event) => {
+      fn.call(context, event)
+    })
+  }
+
+  return isPropEventAndValueFunction
 }
 
 function refPropHandler ($el: HTMLElement, prop: string, value: string, context?: any): boolean {
