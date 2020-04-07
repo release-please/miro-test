@@ -15,10 +15,10 @@ export function render (vnode: vNode, context?: any): HTMLElement {
 }
 
 function propsHandler ($el: HTMLElement, props: any, context?: any): void {
+  // TODO: Research alternative realization
   for (const prop in props) {
     const value: any = props[prop]
 
-    // TODO: Research alternative realization
     if (refPropHandler($el, prop, value, context)) continue
     if (classPropHandler($el, prop, value)) continue
     attributePropHandler($el, prop, value)
@@ -35,7 +35,8 @@ function refPropHandler ($el: HTMLElement, prop: string, value: string, context?
 
 function classPropHandler ($el: HTMLElement, prop: string, value: any): boolean {
   if (prop === 'className') {
-    value.split(' ').forEach((className: string) => {
+    const classNames = value.split(' ')
+    classNames.forEach((className: string) => {
       $el.classList.add(className)
     })
     return true
