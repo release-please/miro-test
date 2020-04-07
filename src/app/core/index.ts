@@ -25,16 +25,16 @@ function propsHandler ($el: HTMLElement, props: any, context?: any): void {
   }
 }
 
-function refPropHandler ($el: HTMLElement, attr: string, value: string, context?: any): boolean {
-  if (attr === 'ref') {
+function refPropHandler ($el: HTMLElement, prop: string, value: string, context?: any): boolean {
+  if (prop === 'ref' && context != null) {
     context.refs[value] = $el
     return true
   }
   return false
 }
 
-function classPropHandler ($el: HTMLElement, attr: string, value: any): boolean {
-  if (attr === 'className') {
+function classPropHandler ($el: HTMLElement, prop: string, value: any): boolean {
+  if (prop === 'className') {
     value.split(' ').forEach((className: string) => {
       $el.classList.add(className)
     })
@@ -43,8 +43,8 @@ function classPropHandler ($el: HTMLElement, attr: string, value: any): boolean 
   return false
 }
 
-function attributePropHandler ($el: HTMLElement, attr: string, value: any): boolean {
-  $el.setAttribute(attr, value)
+function attributePropHandler ($el: HTMLElement, prop: string, value: any): boolean {
+  $el.setAttribute(prop, value)
   return true
 }
 
