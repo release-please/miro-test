@@ -1,8 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = {
-  entry: './src/app/index.ts',
+const config = {
+  entry: './src/app/index.tsx',
   module: {
     rules: [
       {
@@ -26,13 +26,19 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'emails-input.js',
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
     contentBase: path.join(__dirname, 'src/public'),
     compress: true,
     port: 9000,
-  },
-  devtool: 'inline-source-map'
+  }
+}
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.devtool = 'source-map'
+  }
+  return config
 }

@@ -4,7 +4,7 @@
   "description": "miro",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "serve": "webpack-dev-server",
     "test": "jest --coverage --verbose",
     "lint": "eslint --fix \"./src/**/*\""
