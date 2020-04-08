@@ -191,6 +191,42 @@ describe('Core test', () => {
 
         expect($actualNode.isEqualNode($expectedNode)).toBeTruthy()
       })
+
+      it('should call function on click event', () => {
+        const expectedValue = 'changed'
+        let actualValue: string = 'actual'
+        const onClick = (): void => {
+          actualValue = 'changed'
+        }
+
+        const $el = Core.render(
+          <button onclick={onClick}></button>
+        )
+        $el.click()
+
+        expect(actualValue).toBe(expectedValue)
+      })
+
+      it('should call function with context on click event', () => {
+        const expectedValue = {
+          value: 'expected'
+        }
+        const actualValue = {
+          value: ''
+        }
+
+        function onClick (this: any): void {
+          this.value = 'expected'
+        }
+
+        const $el = Core.render(
+          <button onclick={onClick}></button>,
+          actualValue
+        )
+        $el.click()
+
+        expect(actualValue).toStrictEqual(expectedValue)
+      })
     })
   })
 })
