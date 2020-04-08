@@ -208,10 +208,10 @@ describe('Core test', () => {
       })
 
       it('should call function with context on click event', () => {
-        const expectedValue = {
+        const expectedContextValue = {
           value: 'expected'
         }
-        const actualValue = {
+        const actualContextValue = {
           value: ''
         }
 
@@ -221,11 +221,11 @@ describe('Core test', () => {
 
         const $el = Core.render(
           <button onclick={onClick}></button>,
-          actualValue
+          actualContextValue
         )
         $el.click()
 
-        expect(actualValue).toStrictEqual(expectedValue)
+        expect(actualContextValue).toStrictEqual(expectedContextValue)
       })
     })
   })
