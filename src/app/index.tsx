@@ -18,6 +18,10 @@ interface InputEvent extends KeyboardEvent {
 }
 
 class EmailsInput {
+  static EMAIL_ADDED_EVENT = 'EMAIL_ADDED_EVENT'
+  static EMAIL_REMOVED_EVENT = 'EMAIL_REMOVED_EVENT'
+  static EMAIL_ALREADY_EXISTS = 'EMAIL_ALREADY_EXISTS'
+
   rootEl!: HTMLElement
   refs: any
   items!: Map<string, Item>
@@ -70,6 +74,7 @@ class EmailsInput {
 
     const isUnique = (!this.items.has(trimmedEmail))
     if (!isUnique) {
+      this.$bus.emit(EmailsInput.EMAIL_ALREADY_EXISTS, value)
       return
     }
 
@@ -120,6 +125,8 @@ class EmailsInput {
 
     board.insertBefore($email, input)
     this.items.set(value, email)
+
+    this.$bus.emit(EmailsInput.EMAIL_ADDED_EVENT, value)
   }
 
   public delEmail (id: string): void {
@@ -129,6 +136,8 @@ class EmailsInput {
       const $parent = email.$el.parentNode
       $parent?.removeChild(email.$el)
       items.delete(id)
+
+      this.$bus.emit(EmailsInput.EMAIL_REMOVED_EVENT, id)
     }
   }
 

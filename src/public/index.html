@@ -38,7 +38,16 @@
 
     document.body.onload = function () {
       window.emailsInput = EmailsInput(document.getElementById('board-parent'))
-      console.log(emailsInput)
+
+      emailsInput.on(EmailsInput.EMAIL_ADDED_EVENT, (email) => {
+        console.log('add:', email)
+      })
+      emailsInput.on(EmailsInput.EMAIL_REMOVED_EVENT, (email) => {
+        console.log('removed:', email)
+      })
+      emailsInput.on(EmailsInput.EMAIL_ALREADY_EXISTS, (email) => {
+        console.log('exists:', email)
+      })
     }
   </script>
 </body>
