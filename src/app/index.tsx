@@ -51,6 +51,7 @@ class EmailsInput {
           placeholder='add more people…'
           onblur={ (event: InputEvent) => { this.blurEventHandler(event) } }
           onkeydown={ (event: InputEvent) => { this.keyDownEventHandler(event) } }
+          oninput={ (event: InputEvent) => { this.changeEventHandler(event) } }
         />
       </main>,
       this
@@ -155,6 +156,12 @@ class EmailsInput {
 
       const value = event.target.value
       this.addEmail(value)
+    }
+  }
+
+  private changeEventHandler (event: InputEvent): void {
+    if (/,/g.test(event.target.value)) {
+      this.addEmail(event.target.value)
     }
   }
 
