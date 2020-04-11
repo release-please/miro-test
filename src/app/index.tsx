@@ -10,6 +10,14 @@ interface AppItem {
   [key: string]: any
 }
 
+interface InputElementTarget extends EventTarget {
+  value: string
+}
+
+interface InputEvent extends KeyboardEvent {
+  target: InputElementTarget
+}
+
 class API {
   refs: any = {}
   items: Map<string, AppItem> = new Map()
@@ -80,13 +88,18 @@ class API {
     }
   }
 
-  private keyDownHandler (event: any): void {
+  private blurEventHandler (event: InputEvent): void {
+    this.addEmail(event.target.value)
+  }
+
+  private keyDownEventHandler (event: InputEvent): void {
     const COMMA = 188
     const COMMA_RU = 191
     const ENTER = 13
 
     if ([COMMA, COMMA_RU, ENTER].includes(event.keyCode)) {
       event.preventDefault()
+
       const value = event.target.value
       this.addEmail(value)
     }
@@ -107,8 +120,8 @@ class API {
                 type='text'
                 className='input'
                 placeholder='add more people…'
-                onblur={ (event: any) => { this.addEmail(event?.target?.value) } }
-                onkeydown={ () => { this.keyDownHandler(event) }}
+                onblur={ (event: InputEvent) => { this.blurEventHandler(event) } }
+                onkeydown={ (event: InputEvent) => { this.keyDownEventHandler(event) }}
               />
             </main>
           </div>
