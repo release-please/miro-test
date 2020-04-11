@@ -2,11 +2,12 @@
 // TODO: Accessability
 
 @import './reset.scss';
+@import '../public/fonts/Open_Sans/stylesheet.css';
 
 body {
   height: 100%;
 
-  font-family: 'Open Sans', serif;
+  font-family: 'Open Sans';
 }
 
 .container {
