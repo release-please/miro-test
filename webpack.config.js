@@ -28,12 +28,13 @@ const config = {
   output: {
     filename: 'emails-input.js',
     path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd',
   },
   devServer: {
     contentBase: path.join(__dirname, 'src/public'),
     compress: true,
     port: 9000,
-  }
+  },
 }
 
 module.exports = (env, argv) => {

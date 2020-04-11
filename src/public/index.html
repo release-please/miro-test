@@ -6,6 +6,11 @@
   <title>Miro Frontend Test</title>
 </head>
 <body>
-  
+  <script>
+    document.body.onload = function () {
+      window.api = new API(document.body)
+      console.log(api)
+    }
+  </script>
 </body>
 </html>
