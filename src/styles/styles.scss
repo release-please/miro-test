@@ -17,7 +17,7 @@ body {
   justify-content: center;
 }
 
-.board {
+.form {
   display: block;
   overflow: hidden;
   // min-height: 300px;
@@ -56,25 +56,25 @@ body {
     }
   }
 
-  &__space {
-    overflow-y: auto;
-
-    box-sizing: border-box;
-    height: 96px;
-    padding: 7px 8px;
-    padding-right: 17px;
-
-    border: 1px solid #c3c2cf;
-    border-radius: 4px;
-    background-color: #fff;
-  }
-
   &__footer {
     padding: 24px 50px 32px;
   }
 }
 
-.label {
+.board {
+  overflow-y: auto;
+
+  box-sizing: border-box;
+  height: 96px;
+  padding: 7px 8px;
+  padding-right: 17px;
+
+  border: 1px solid #c3c2cf;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.email {
   display: inline-block;
 
   box-sizing: border-box;
