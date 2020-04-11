@@ -83,14 +83,14 @@ class EmailsInput {
 
   // TODO: Split on several functions
   public addEmail (value: string): void {
-    const trimmedEmail = value.trim()
-    const isEmpty = (trimmedEmail === '')
+    const trimmedValue = value.trim()
+    const isEmpty = (trimmedValue === '')
     if (isEmpty) {
       this.cleanInput()
       return
     }
 
-    const isUnique = (!this.items.has(trimmedEmail))
+    const isUnique = (!this.items.has(trimmedValue))
     if (!isUnique) {
       this.$bus.emit(EmailsInput.EMAIL_ALREADY_EXISTS, value)
       return
@@ -104,7 +104,7 @@ class EmailsInput {
       return
     }
 
-    const email = this.prepareEmail(trimmedEmail)
+    const email = this.prepareEmail(trimmedValue)
     this.insertEmail(email)
 
     this.cleanInput()
