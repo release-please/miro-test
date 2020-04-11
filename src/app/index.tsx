@@ -64,6 +64,23 @@ class EmailsInput {
     this.$bus.on(event, callback)
   }
 
+  public getAllItems (): any {
+    return [...this.items.values()]
+  }
+
+  public replaceAllItems (emails: string[]): void {
+    this.removeAllItems()
+    emails.forEach(email => {
+      this.addEmail(email)
+    })
+  }
+
+  private removeAllItems (): void {
+    this.items.forEach((_value: Item, key: string) => {
+      this.delEmail(key)
+    })
+  }
+
   // TODO: Split on several functions
   public addEmail (value: string): void {
     const trimmedEmail = value.trim()
