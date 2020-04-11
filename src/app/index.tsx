@@ -5,7 +5,6 @@ import * as Core from './core'
 import { Observer, isEmailValid } from './utils'
 
 interface Item {
-  id: string
   $el: HTMLElement
   [key: string]: any
 }
@@ -39,41 +38,46 @@ class EmailsInput {
 
   private render (): void {
     const $container = Core.render(
-      <div className='container'>
-        <div className='form'>
-          <div className='form__body'>
-            <h1 className='form__title'>
-              Shared <span className='form__title form__title_bold'>Board name</span> with others
-            </h1>
-            <main ref="board" className='board'>
-              {/* EMAILS WILL BE INSERTED HERE */ }
-              <input
-                ref="input"
-                type='text'
-                className='input'
-                placeholder='add more people…'
-                onblur={ (event: InputEvent) => { this.blurEventHandler(event) } }
-                onkeydown={ (event: InputEvent) => { this.keyDownEventHandler(event) } }
-              />
-            </main>
-          </div>
-          <div className='form__footer'>
-            <button className='btn btn_primary'>Add email</button>
-            <button className='btn btn_primary'>Get emails count</button>
-          </div>
-        </div>
-      </div>,
+      <main ref="board" className='board'>
+        {/* EMAILS WILL BE INSERTED HERE */ }
+        <input
+          ref="input"
+          type='text'
+          className='input'
+          placeholder='add more people…'
+          onblur={ (event: InputEvent) => { this.blurEventHandler(event) } }
+          onkeydown={ (event: InputEvent) => { this.keyDownEventHandler(event) } }
+        />
+      </main>,
       this
     )
 
     this.rootEl.append($container)
   }
 
+  public on (event: string, callback: Function): void {
+    this.$bus.on(event, callback)
+  }
+
+  // TODO: Split on several functions
   public addEmail (value: string): void {
     const trimmedEmail = value.trim()
     const isEmpty = (trimmedEmail === '')
     if (isEmpty) {
       this.cleanInput()
+      return
+    }
+
+    const isUnique = (!this.items.has(trimmedEmail))
+    if (!isUnique) {
+      return
+    }
+
+    const emails = value.split(',')
+    if (emails.length > 1) {
+      emails.forEach(email => {
+        this.addEmail(email)
+      })
       return
     }
 
@@ -85,7 +89,6 @@ class EmailsInput {
   }
 
   private prepareEmail (value: string): Item {
-    const ID = `EMAIL_${Math.random()}`
     const isValid = isEmailValid(value)
     const classValidOrNot = (isValid)
       ? 'email_valid'
@@ -96,14 +99,13 @@ class EmailsInput {
         <div className='email__wrapper'>
           <span className='email__text'>{ value }</span>
           <button className='email__close'
-            onclick={ () => { this.delEmail(ID) } }
+            onclick={ () => { this.delEmail(value) } }
           ></button>
         </div>
       </div>
     )
 
     const result = {
-      id: ID,
       $el: $email,
       value: value,
       isValid: isValid
@@ -114,13 +116,13 @@ class EmailsInput {
 
   private insertEmail (email: Item): void {
     const { board, input } = this.refs
-    const { id, $el: $email } = email
+    const { value, $el: $email } = email
 
     board.insertBefore($email, input)
-    this.items.set(id, email)
+    this.items.set(value, email)
   }
 
-  private delEmail (id: string): void {
+  public delEmail (id: string): void {
     const { items } = this
     const email = items.get(id)
     if (email != null) {
