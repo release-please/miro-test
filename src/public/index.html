@@ -40,13 +40,13 @@
       window.emailsInput = EmailsInput(document.getElementById('board-parent'))
 
       emailsInput.on(EmailsInput.EMAIL_ADDED_EVENT, (email) => {
-        console.log('add:', email)
+        console.log('Email with value:', email, ', successfully added.')
       })
       emailsInput.on(EmailsInput.EMAIL_REMOVED_EVENT, (email) => {
-        console.log('removed:', email)
+        console.log('Email with value:', email, ', successfully removed.')
       })
       emailsInput.on(EmailsInput.EMAIL_ALREADY_EXISTS, (email) => {
-        console.log('exists:', email)
+        console.log('Email with value:', email, ', is already exists.')
       })
     }
   </script>
