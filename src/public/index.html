@@ -14,13 +14,13 @@
         </h1>
       </div>
       <div class='form__footer'>
-        <button class='btn btn_primary' onclick="addRandom(emailsInput)">Add email</button>
+        <button class='btn btn_primary' onclick="addRandomEmail(emailsInput)">Add email</button>
         <button class='btn btn_primary' onclick="getEmailsCount(emailsInput)">Get emails count</button>
       </div>
     </div>
   </div>
   <script>
-    function addRandom (emailsInputInstance) {
+    function addRandomEmail (emailsInputInstance) {
       const name =  Math.random().toString(36).substring(7).slice(0, 7)
       const host =  Math.random().toString(36).substring(7).slice(0, 7)
       const domain =  Math.random().toString(36).substring(7).slice(0, 3)
