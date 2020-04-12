@@ -11,8 +11,10 @@ After you will be available `EmailsInput` constructor.
 
 ```js
 var inputContainerNode = document.querySelector('#emails-input');
-var emailsInput = EmailsInput(inputContainerNode, {...options});
+var emailsInput = EmailsInput(inputContainerNode[, {...options}]);
 ```
+
+Where `options` is optional parameter, which have `emails` field with array of string, which will be converted to emails.
 
 `emailsInput` instance have following methods:
 
@@ -174,8 +176,17 @@ emailsInput.delEmail('valid@email.com') // Will remove 'valid@email.com' if exis
 <script src="emails-input.js"></script>
 ```
 
-## Used technology
+## Scripts
+- `build` - create build in dist directory.
+- `serve` - run dev live server.
+- `test` - run all test suites.
+- `test:core` - run test suites for core only.
+- `test:utils` - run test suites for utils only.
+- `test:dom` - run test suites for DOM only.
+- `lint` - lint and fix all auto-fixable ts(x) problems
+- `lint:sass` - fix all auto-fixable sass problems
 
+## Used technology
 1. Angular commit convention
 1. Bootstrap css naming
 1. BEM
