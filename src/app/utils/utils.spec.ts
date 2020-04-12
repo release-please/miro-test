@@ -6,8 +6,16 @@ describe('Test #Utils', () => {
       expect(isEmailValid('qwe@qwe.com')).toBeTruthy()
     })
 
+    it('Valid cyrillic email `валидный@емэил.ру`. Should be true', () => {
+      expect(isEmailValid('qwe@qwe.com')).toBeTruthy()
+    })
+
     it('Invalid email `qwe.qwe.com`. Should be false', () => {
       expect(isEmailValid('qwe.qwe.com')).toBeFalsy()
+    })
+
+    it('Invalid email `sdf sdf@fds.df`. Should be false', () => {
+      expect(isEmailValid('sdf sdf@fds.df')).toBeFalsy()
     })
 
     it('Empty email. Should be false', () => {
