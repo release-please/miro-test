@@ -1,5 +1,7 @@
 # Usage
 
+[Live demo page.](https://release-please.github.io/miro-test/dist/)
+
 In the `dist/` directory you will found `emails-input.js` as UMD build.
 
 UMD build can be used directly in the browser via a `<script>` tag.
