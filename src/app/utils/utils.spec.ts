@@ -1,6 +1,6 @@
 import { isEmailValid, Observer } from '.'
 
-describe('Test Utils', () => {
+describe('Test #Utils', () => {
   describe('Email validator', () => {
     it('Valid email `qwe@qwe.com`. Should be true', () => {
       expect(isEmailValid('qwe@qwe.com')).toBeTruthy()

@@ -2,7 +2,7 @@
 import { h } from '.'
 import * as Core from '.'
 
-describe('Core test', () => {
+describe('Test #Core', () => {
   it.todo('Research: `Core.render()` prop handlers. Patterns, loop, if-else alternative. See TODO')
   it.todo('`Core.render()` ref without context')
 

@@ -7,6 +7,9 @@
     "build": "webpack --mode=production",
     "serve": "webpack-dev-server",
     "test": "jest --coverage --verbose",
+    "test:core": "jest --coverage --verbose -t '#Core'",
+    "test:utils": "jest --coverage --verbose -t '#Utils'",
+    "test:dom": "jest --coverage --verbose -t '#DOM'",
     "lint": "eslint --fix \"./src/**/*\"",
     "lint:sass": "csscomb -c .csscomb.json ./src"
   },

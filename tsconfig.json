@@ -67,6 +67,7 @@
   },
   "include": [
     "./src/app/**/*",
-    "./src/types/**/*"
+    "./src/types/**/*",
+    "./__test__/**/*"
   ]
 }
