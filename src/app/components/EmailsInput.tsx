@@ -14,6 +14,7 @@ class EmailsInput {
   private readonly refs: any
   private readonly items!: Map<string, EmailItem>
   private readonly $bus!: Observer
+  private readonly EmailFactory!: Email
 
   constructor (rootEl: HTMLElement, options?: any) {
     if (!(this instanceof EmailsInput)) {
@@ -28,6 +29,7 @@ class EmailsInput {
     this.refs = {}
     this.items = new Map()
     this.$bus = new Observer()
+    this.EmailFactory = new Email({ onRemoveClick: this.delEmail.bind(this) })
 
     this.render()
     this.focusInput()
@@ -77,9 +79,7 @@ class EmailsInput {
       return
     }
 
-    const email = new Email({
-      onRemoveClick: this.delEmail.bind(this)
-    }).createByValue(value)
+    const email = this.EmailFactory.createByValue(value)
 
     if (email != null) {
       this.insertEmail(email)
