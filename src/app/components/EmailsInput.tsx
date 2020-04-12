@@ -37,7 +37,12 @@ class EmailsInput {
 
   private render (): void {
     const $container = Core.render(
-      <main ref='board' className='board'>
+      <main
+        ref='board'
+        className='board'
+        onclick={() => {
+          this.focusInput()
+        }}>
         {/* EMAILS WILL BE INSERTED HERE */}
         <input
           ref='input'
