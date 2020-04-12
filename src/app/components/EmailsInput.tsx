@@ -63,38 +63,15 @@ class EmailsInput {
     })
   }
 
-  public on (event: string, callback: Function): void {
-    this.$bus.on(event, callback)
-  }
-
-  public getAllItems (): any {
-    return [...this.items.values()]
-  }
-
-  public replaceAllItems (emails: string[]): void {
-    this.removeAllItems()
-    if (Array.isArray(emails)) {
-      emails.forEach((email) => {
-        this.addEmail(email)
-      })
-    }
-  }
-
-  private removeAllItems (): void {
-    this.items.forEach((_value: EmailItem, key: string) => {
-      this.delEmail(key)
-    })
-  }
-
   public addEmail (value: string): void {
     const trimmedValue = value.trim()
-    const isEmpty = trimmedValue === ''
+    const isEmpty = (trimmedValue === '')
     if (isEmpty) {
       this.cleanInput()
       return
     }
 
-    const isUnique = !this.items.has(trimmedValue)
+    const isUnique = (!this.items.has(trimmedValue))
     if (!isUnique) {
       this.$bus.emit(EmailsInput.EMAIL_ALREADY_EXISTS, value)
       return
@@ -132,6 +109,29 @@ class EmailsInput {
 
       this.$bus.emit(EmailsInput.EMAIL_REMOVED_EVENT, id)
     }
+  }
+
+  public on (event: string, callback: Function): void {
+    this.$bus.on(event, callback)
+  }
+
+  public getAllItems (): any {
+    return [...this.items.values()]
+  }
+
+  public replaceAllItems (emails: string[]): void {
+    this.removeAllItems()
+    if (Array.isArray(emails)) {
+      emails.forEach((email) => {
+        this.addEmail(email)
+      })
+    }
+  }
+
+  private removeAllItems (): void {
+    this.items.forEach((_value: EmailItem, key: string) => {
+      this.delEmail(key)
+    })
   }
 
   private blurEventHandler (event: InputEvent): void {
