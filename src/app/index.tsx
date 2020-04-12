@@ -70,9 +70,11 @@ class EmailsInput {
 
   public replaceAllItems (emails: string[]): void {
     this.removeAllItems()
-    emails.forEach(email => {
-      this.addEmail(email)
-    })
+    if (Array.isArray(emails)) {
+      emails.forEach(email => {
+        this.addEmail(email)
+      })
+    }
   }
 
   private removeAllItems (): void {
