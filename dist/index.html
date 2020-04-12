@@ -15,7 +15,12 @@
     }
 
     document.body.onload = function () {
-      window.emailsInput = EmailsInput(document.getElementById('board-parent'))
+      window.emailsInput = EmailsInput(document.getElementById('board-parent'), {
+        emails: [
+          'valid@email.com',
+          'invalid.email',
+        ]
+      })
 
       emailsInput.on(EmailsInput.EMAIL_ADDED_EVENT, (email) => {
         console.log('Email with value:', email, ', successfully added.')
