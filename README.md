@@ -68,8 +68,9 @@ emailsInput.getAllItems()
 #### Email object explanation
 The object have following fields:
 
-1. `$el` - The Element object describing the DOM element object.
-1. `value` - String object representing the entered before value.
+1. `id` - The unique id of object.
+2. `$el` - The Element object describing the DOM element object.
+3. `value` - String object representing the entered before value.
 1. `isValid` - Boolean object representing the entered before value is valid email.
 
 #### Example
@@ -131,51 +132,55 @@ emailsInput.delEmail('valid@email.com') // Will remove 'valid@email.com' if exis
 
 ## Example
 ```html
-<div class='container'>
- <div class='form'>
-   <div id="board-parent" class='form__body'>
-     <h1 class='form__title'>
-       Shared <span class='form__title form__title_bold'>Board name</span> with others
-     </h1>
-   </div>
-   <div class='form__footer'>
-     <button class='btn btn_primary' onclick="addRandomEmail(emailsInput)">Add email</button>
-     <button class='btn btn_primary' onclick="getEmailsCount(emailsInput)">Get emails count</button>
-   </div>
- </div>
-</div>
-<script>
- function addRandomEmail (emailsInputInstance) {
-   const name =  Math.random().toString(36).substring(7).slice(0, 7)
-   const host =  Math.random().toString(36).substring(7).slice(0, 7)
-   const domain =  Math.random().toString(36).substring(7).slice(0, 3)
-   const email = `${name}@${host}.${domain}`
+  <div class='container'>
+    <div class='form'>
+      <div id="board-parent" class='form__body'>
+        <h1 class='form__title'>
+          Shared <span class='form__title form__title_bold'>Board name</span> with others
+        </h1>
+      </div>
+      <div class='form__footer'>
+        <button class='btn btn_primary' onclick="addRandomEmail(emailsInput)">Add email</button>
+        <button class='btn btn_primary' onclick="getEmailsCount(emailsInput)">Get emails count</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function addRandomEmail (emailsInputInstance) {
+      const name =  Math.random().toString(36).substring(7).slice(0, 7)
+      const host =  Math.random().toString(36).substring(7).slice(0, 7)
+      const domain =  Math.random().toString(36).substring(7).slice(0, 3)
+      const email = `${name}@${host}.${domain}`
 
-   emailsInputInstance.addEmail(email)
- }
+      emailsInputInstance.addEmail(email)
+    }
 
- function getEmailsCount (emailsInputInstance) {
-   const count = emailsInputInstance.getAllItems()
-     .filter(email => email.isValid).length
+    function getEmailsCount (emailsInputInstance) {
+      const count = emailsInputInstance.getAllItems()
+        .filter(email => email.isValid).length
 
-   alert(`contain ${count} valid emails`)
- }
+      alert(`contain ${count} valid emails`)
+    }
 
- document.body.onload = function () {
-   window.emailsInput = EmailsInput(document.getElementById('board-parent'))
+    document.body.onload = function () {
+      window.emailsInput = EmailsInput(document.getElementById('board-parent'), {
+        emails: [
+          'valid@email.com',
+          'invalid.email',
+        ]
+      })
 
-   emailsInput.on(EmailsInput.EMAIL_ADDED_EVENT, (email) => {
-     console.log('add:', email)
-   })
-   emailsInput.on(EmailsInput.EMAIL_REMOVED_EVENT, (email) => {
-     console.log('removed:', email)
-   })
-   emailsInput.on(EmailsInput.EMAIL_ALREADY_EXISTS, (email) => {
-     console.log('exists:', email)
-   })
- }
-</script>
-<script src="emails-input.js"></script>
+      emailsInput.on(EmailsInput.EMAIL_ADDED_EVENT, (email) => {
+        console.log('Email with value:', email, ', successfully added.')
+      })
+      emailsInput.on(EmailsInput.EMAIL_REMOVED_EVENT, (email) => {
+        console.log('Email with value:', email, ', successfully removed.')
+      })
+      emailsInput.on(EmailsInput.EMAIL_ALREADY_EXISTS, (email) => {
+        console.log('Email with value:', email, ', is already exists.')
+      })
+    }
+  </script>
 ```
 
 ## Scripts
